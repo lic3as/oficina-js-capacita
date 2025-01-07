@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Tarefas</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        body{
+            background-color: rgb(202, 254, 237);
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        #titulo{
+            text-align: center;
+            margin-top: 20px;
+            margin-bottom: 12px;
+            font-weight: 600;
+            font-size: 32px;
+        }
+        #adicionar{
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+        }
+        #novaTarefa{
+            margin-right: 4px;
+            width: 400px;
+            height: 22px;
+            font-size: 16px;
+            border: black 1px solid;
+        }
+        #adicionarTarefa{
+            width: 160px;
+            height: 24px;
+            font-size: 16px;
+            background-color: rgb(201, 212, 208);
+            border: black 1px solid;
+        }
+        #novaTarefa:hover{
+            background-color: rgb(242, 242, 242);
+        }
+        #adicionarTarefa:hover{
+            background-color: rgb(173, 182, 178);
+        }
+        #divTarefa{
+            width: 300px;
+            height: 200px;
+            margin-left: 20px;
+            margin-block: 20px;
+            background-color: beige;
+            padding: 20px;
+            border: black 1px solid;
+            
+            & #concluirTarefa{
+                width: 80px;
+                height: 22px;
+                font-size: 16px;
+                background-color: rgb(201, 212, 208);
+                border: black 1px solid;
+                margin-right: 6px;
+            }
+            & #concluirTarefa:hover{
+                background-color: rgb(173, 182, 178);
+            }
+            & #excluirTarefa{
+                width: 80px;
+                height: 22px;
+                font-size: 16px;
+                background-color: rgb(201, 212, 208);
+                border: black 1px solid;
+            }
+            & #excluirTarefa:hover{
+                background-color: rgb(173, 182, 178);
+            }
+            & #btnTarefas{
+                display: flex;
+                flex-direction: row;
+                justify-content: center;
+                position: relative;
+                top: 120px
+            }
+            & p{
+                text-align: center;
+            }
+        }
+        #tarefas{
+            display: flex;
+            flex-direction: row;
+
+        }
+    </style>
+</head>
+<body>
+    <p id="titulo">Lista de Tarefas</p>
+    <div id="adicionar">
+        <input type="text" name="novaTarefa" id="novaTarefa">
+        <button type="submit" id="adicionarTarefa">Adicionar tarefa</button>
+    </div>
+
+    <div id="tarefas">
+       
+    </div>
+    <script>
+        var tarefas = Array();
+
+        var txtNova = document.getElementById('novaTarefa');
+        var btnAdicionar = document.getElementById('adicionarTarefa');
+        var areaTarefas = document.getElementById('tarefas');
+        
+        btnAdicionar.addEventListener('click', () => {
+            tarefas.push(txtNova.value);
+            areaTarefas.innerHTML += `<div id = "divTarefa">
+            <p>${tarefas[tarefas.length - 1]}</p> 
+            <div id="btnTarefas">
+                <button type="submit" id="concluirTarefa">Concluir</button> 
+                <button type="submit" id="excluirTarefa">Excluir</button>
+            </div>
+        </div>`
+        
+        var btnConcluir = document.getElementById('concluirTarefa');
+        var btnExcluir = document.getElementById('excluirTarefa');
+        })
+
+        btnConcluir.addEventListener('click', () => {
+            concole.log("concluiu")
+        })
+        
+    </script>
+</body>
+</html>

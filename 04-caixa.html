@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulador de Caixa Eletrônico</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        body{
+            font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        #titulo{
+            margin-top: 40px;
+            font-weight: 600;
+            font-size: 32px;
+            text-align: center;
+        }
+        #saque{
+            margin-top: 20px;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: center;
+        }
+        #vSaque{
+            text-align: center;
+            margin-right: 6px;
+            font-size: 20px;
+            width: 120px;
+            height: 28px;
+            &:focus, :active {
+                text-align: center;
+            }
+            border: black 1px solid;
+        }
+        #vSaque:hover{
+        background-color: rgb(241, 232, 232);
+        }
+        #btnSacar{
+            font-size: 16px;
+            width: 60px;
+            height: 30px;
+            border: black 1px solid;
+            background-color: rgb(131, 130, 130);
+            color: rgb(242, 242, 242);
+        }
+        #btnSacar:hover{
+            background-color: rgb(212, 212, 212);
+            color: black;
+        }
+        #qtdCedulas{
+            text-align: center;
+            font-size: 24px;
+            color: rgb(64, 192, 64);
+        }
+    </style>
+</head>
+<body>
+    <p id="titulo">Simulador de Caixa Eletrônico</p>
+    <div id="saque">
+        <input type="number" name="vSaque" id="vSaque" min="0">
+        <button type="submit" id="btnSacar">Sacar</button>
+    </div>
+    <p id="qtdCedulas"></p>
+
+    <script>
+        var inputSaque = document.getElementById('vSaque');
+        var btnSaque = document.getElementById('btnSacar');
+        var resultado = document.getElementById('qtdCedulas');
+
+        btnSaque.addEventListener('click', () => {
+            var valor = parseFloat(inputSaque.value);
+
+            var qtd100 = 0;
+            var qtd50 = 0;
+            var qtd20 = 0;
+            var qtd10 = 0;
+            var qtd5 = 0;
+            var qtd2 = 0;
+
+            qtd100 = Math.floor(valor / 100);
+            valor %= 100;
+            qtd50 =  Math.floor(valor / 50);
+            valor %= 50;
+            qtd20 = Math.floor(valor / 20);
+            valor %= 20;
+            qtd10 = Math.floor(valor / 10);
+            valor %= 10;
+            qtd5 = Math.floor(valor / 5);
+            valor %= 5;
+            qtd2 = Math.floor(valor / 2);
+            valor %= 2;
+
+            var mensagem = "Resultado do saque:\n";
+            if (qtd100 > 0) mensagem += `${qtd100} cédula(s) de R$ 100\n`;
+            if (qtd50 > 0) mensagem += `${qtd50} cédula(s) de R$ 50\n`;
+            if (qtd20 > 0) mensagem += `${qtd20} cédula(s) de R$ 20\n`;
+            if (qtd10 > 0) mensagem += `${qtd10} cédula(s) de R$ 10\n`;
+            if (qtd5 > 0) mensagem += `${qtd5} cédula(s) de R$ 5\n`;
+            if (qtd2 > 0) mensagem += `${qtd2} cédula(s) de R$ 2\n`;
+            if(valor > 0) mensagem += `Sobram R$ ${valor}\n`
+
+            resultado.innerText = mensagem;
+        })
+    </script>
+</body>
+</html>

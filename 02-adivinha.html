@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jogo de Adivinhação</title>
+    <style>
+        *{  
+            margin: 0;
+            padding: 0;
+        }
+        body{
+            background-color: rgb(19, 19, 19);
+            color: rgb(244, 244, 244);
+            font-family: 'Gill Sans', sans-serif;
+        }
+        #container{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+        }
+        #p1{
+            font-size: 32px;
+            font-weight: 400;
+            margin-bottom: 16px;
+        }
+        #palpite{
+            text-align: center;
+            width: 80px;
+            height: 40px;
+            font-size: 26px;
+            margin-bottom: 8px;
+            &:focus, :active {
+                text-align: center;
+            }
+        }
+        #btnPalpite{
+            color: rgb(244, 244, 244);
+            background-color: rgb(144, 27, 254);
+            height: 32px;
+            width: 150px;
+            margin-bottom: 16px;
+            font-size: 16px;
+            border: none;
+        }
+        #btnPalpite:hover{
+            border: white 2px solid;
+        }
+        #feedback{
+            font-size: 24px;
+            text-transform: uppercase;
+            margin-bottom: 16px;
+            background-color: rgb(244, 244, 244);
+            color:rgb(19, 19, 19);
+            padding: 10px;
+        }
+        #tentativas{
+            font-size: 16px;
+            margin-bottom: 16px;
+        }
+        #reiniciar{
+            color: rgb(244, 244, 244);
+            background-color: rgb(81, 159, 255);
+            height: 32px;
+            width: 150px;
+            margin-bottom: 16px;
+            font-size: 16px;
+            border: none;
+        }
+        #reiniciar:hover{
+            border: white 2px solid;
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <p id="p1">Adivinhe o número secreto!</p>
+        <input type="number" name="palpite" id="palpite" min="1" max="100">
+        <button type="submit" id="btnPalpite">Enviar palpite</button>
+        <p id="feedback">Informe o palpite</p>
+        <p id="tentativas">Tentativas = 0</p>
+        <button type="submit" id="reiniciar">Reiniciar jogo</button>
+    </div>
+    <script>
+        let num = Math.floor(Math.random() * 100) + 1;
+        var qtdTentativas = 0;
+        var acertou = false;
+
+        const numPalpite = document.getElementById('palpite');
+        const btnPalpite = document.getElementById('btnPalpite');
+        const txtFeedback = document.getElementById('feedback');
+        const txtTentativas = document.getElementById('tentativas');
+        const btnReiniciar = document.getElementById('reiniciar');
+
+        btnPalpite.addEventListener('click', () =>{
+            var numInt = parseInt(numPalpite.value);
+            qtdTentativas++;
+            txtTentativas.textContent = `Tentativas = ${qtdTentativas}`;
+            if(numInt > num){
+                txtFeedback.textContent = `Muito alto!`;
+            } else if(numInt < num){
+                txtFeedback.textContent = `Muito baixo!`;
+            } else{
+                acertou = true;
+                txtFeedback.textContent = `Acertou, era ${num}!`;
+                btnPalpite.disabled = true;
+                btnReiniciar.textContent = `Jogar novamente`
+            }
+        })
+
+        btnReiniciar.addEventListener('click', () => {
+            num = Math.floor(Math.random() * 100) + 1;
+            qtdTentativas = 0;
+            acertou = false;
+            txtTentativas.textContent = `Tentativas = ${qtdTentativas}`;
+            numPalpite.value = '';
+            txtFeedback.textContent = `Informe o palpite`;
+            btnPalpite.disabled = false;
+        })
+    </script>
+</body>
+</html>
